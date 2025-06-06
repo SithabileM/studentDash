@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Teacher Page</title>
+    </head>
+    <body>
+        {%for s in subjects%}
+            <a href="{%url 'teacherSubject' s.id%}">{{s.name}}</a>
+        {%endfor%}
+    </body>
+</html>

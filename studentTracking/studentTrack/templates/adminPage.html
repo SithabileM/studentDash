@@ -1,0 +1,35 @@
+{%extends "signupLayout.html"%}
+
+{%block body%}
+<h2>Create User</h2>
+<form method="POST" action="{%url 'createUser' %}">
+    {%csrf_token%}
+    {{userForm}}
+</form>
+
+<h2>Classrooms</h2>
+{%for i in classes%}
+<div>
+    <p>{{i.grade}}{{i.room}}</p>
+    <form method="POST" action="{%url 'deleteClassroom' i.id%}">
+        {%csrf_token%}
+        <button type='submit'>Delete Classroom</button>
+    </form>
+    <a href="{%url 'viewClassroom' i.id%}">View Classroom</a>
+</div>
+{%endfor%}
+<a href="{%url 'createClassroom'%}">Create new class</a>
+
+
+<h2>Subjects Offered</h2>
+{%for s in subjects%}
+<div>
+    <a action="{%url 'subjectView' s.id%}">{{s.name}}</a>
+    <form method="POST" action="{%url 'deleteSubject' s.id%}">
+        {%csrf_token%}
+        <button type='submit'>Delete subject</button>
+    </form>
+</div>
+{%endfor%}
+<a href="{%url 'addSubject'%}">Add new Subject</a>
+{%endblock%}

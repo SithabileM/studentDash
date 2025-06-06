@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Classroom
+        </title>
+    </head>
+    <body>
+        <table>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>D.O.B</th>
+                    <th>Guardian</th>
+                    <th>Performace</th>
+                </tr>
+            </thead>
+        {%for s in students%}
+            <tbody>
+                <tr>
+                    <td>{{s.user.username}}</td>
+                    <td>{{s.dateOfBirth}}</td>
+                    <td>{{s.guardian}}</td>
+                    <td><a href="{%url 'studentView' s.user.id%}">View Performace</a></td>
+                </tr>
+
+            </tbody>
+
+
+        </table>
+        {%endfor%}
+    </body>
+</html>

@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{name}}</title>
+    </head>
+    <body>
+        <h1>{{name}}'s Dashboard</h1>
+        {%for s in subjects%}
+            <a href="{%url 'studentSubjectDetails' s.id%}">{{s.name}}</a>
+        {%endfor%}
+    </body>
+</html>

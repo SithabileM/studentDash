@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            SubjectView
+        </title>
+    </head>
+    <body>
+        <h1>Students</h1>
+        {%for s in students%}
+            <p>{{s.user.username}}</p>
+            <p>{{s.classroom}}</p>
+
+        {%endfor%}
+    </body>
+</html>

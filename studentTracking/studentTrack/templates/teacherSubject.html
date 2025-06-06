@@ -1,0 +1,37 @@
+{%extends 'signupLayout.html'%}
+
+{%block body%}
+    <h1>{{subject.name}}</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Classroom</th>
+                {%for n in number%}
+                    <th><p>Test Mark {{n}}</p></th>
+                {%endfor%}
+                <th>Final Test Mark</th>
+                <th>Save</th>
+                <th>Average</th>
+            </tr>
+        </thead>
+        <tbody>
+            {%for s in students%}
+            <form method='POST' action="{%url 'addMarks' subject.id s.user.id %}">
+                {%csrf_token%}
+            <tr>
+                <td>{{s.user.username}}</td>
+                <td>{{s.classroom}}</td>
+                {%for n in number%}
+                    <td><input type='number' name="Mark_{{s.user.id}}">Test Mark {{n}}</input></td>
+                {%endfor%}
+                    <td><input type='number' name"FinalTest_{{s.user.id}}" placeholder='Final'/></td>
+                    <td><input type='submit' name='Save'/></td>
+                <td>average</td>
+            </tr>
+            </form>
+            {%endfor%}
+        </tbody>
+    </table>
+{%endblock%}
