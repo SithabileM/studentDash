@@ -1,19 +1,34 @@
 {%extends 'signupLayout.html'%}
-
+{%block head%}
+{%load static%}
+<link rel="stylesheet" type="text/css" href="{%static "css/teacherSubject.css"%}">
+{%endblock%}
+{%block heading%}
+<h1>{{subject.name}}</h1>
+{%endblock%}
 {%block body%}
-    <h1>{{subject.name}}</h1>
-
+    <form method='POST' action="{%url "addMarkDistribution"%}">
+        {%csrf_token%}
+        <h3>Mark distribution</h3>
+        <p>Out of the specified marks distribution for assignments how much does each assignment contribute?</P>
+        {%for n in number%}
+        <input type="number" required="true" name="mark_{{n}}"/>
+        {%endfor%}
+        <input type='hidden' name='subject' value="{{subject.id}}"/></br>
+        <input class='button' type="submit"/>
+    </form>
+    <h2> Record Marks</h2>
+    <p>Note that all marks below should be recorded in percentages</p>
     <table>
         <thead>
             <tr>
                 <th>Username</th>
                 <th>Classroom</th>
                 {%for n in number%}
-                    <th><p>Test Mark {{n}}</p></th>
+                    <th>Test Mark {{n}}</th>
                 {%endfor%}
                 <th>Final Test Mark</th>
                 <th>Save</th>
-                <th>Average</th>
             </tr>
         </thead>
         <tbody>
@@ -24,11 +39,10 @@
                 <td>{{s.user.username}}</td>
                 <td>{{s.classroom}}</td>
                 {%for n in number%}
-                    <td><input type='number' name="Mark_{{s.user.id}}">Test Mark {{n}}</input></td>
+                    <td><input type='number' name="Mark_{{n}}"/></td>
                 {%endfor%}
-                    <td><input type='number' name"FinalTest_{{s.user.id}}" placeholder='Final'/></td>
-                    <td><input type='submit' name='Save'/></td>
-                <td>average</td>
+                    <td><input type='number' name="FinalTest_{{s.user.username}}"/></td>
+                    <td><input class='button' type='submit' name='Save'/></td>
             </tr>
             </form>
             {%endfor%}

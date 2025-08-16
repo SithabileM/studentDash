@@ -2,8 +2,11 @@
 <html>
     <head>
         <title>Teacher Page</title>
+        {%load static%}
+        <link rel="stylesheet" type="text/css" href="{%static "css/teacherPage.css"%}">
     </head>
     <body>
+        <h1>My subjects</h1>
         {%for s in subjects%}
             <a href="{%url 'teacherSubject' s.id%}">{{s.name}}</a>
         {%endfor%}

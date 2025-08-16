@@ -27,6 +27,7 @@ class Teacher(models.Model):
         return self.user.username
     
 class Subject(models.Model):
+    #Name of subject should be very specific and unique i.e include the grade and term and year e.g(Herritage studies Gr.12 Term 1 2025)
     name = models.CharField(max_length=30,unique=True)
     educator= models.OneToOneField(Teacher,on_delete=models.CASCADE)
     
@@ -46,7 +47,7 @@ class Assignment(models.Model):
 class Student(models.Model):
     user=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
     subjects = models.ManyToManyField(Subject)
-    classroom = models.OneToOneField(Classroom, on_delete=models.CASCADE)
+    classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE)
     dateOfBirth=models.DateField(null=True,blank=True)
     guardian=models.CharField(null=True,blank=True)
     
@@ -54,14 +55,16 @@ class Student(models.Model):
         return self.user.username
     
 class StudentMark(models.Model):
-    learner=models.OneToOneField(CustomUser,on_delete=models.CASCADE)
-    subject=models.OneToOneField(Subject,on_delete=models.CASCADE)
-    courseMark=models.FloatField(default=0)
-    ExamMark=models.FloatField(default=0)
-    average=models.FloatField(default=0)
-    
+    learner=models.ForeignKey(CustomUser,on_delete=models.CASCADE)
+    subject=models.ForeignKey(Subject,on_delete=models.CASCADE)
+    courseMark=models.FloatField(default=1)
+    ExamMark=models.FloatField(default=1)
+    average=models.FloatField(default=1)
     def __str__(self):
         return self.learner.username + self.subject.name
     
+class MarksDistribution(models.Model):
+    distribution=models.JSONField(null=True,blank=True)
+    assignment=models.OneToOneField(Assignment,on_delete=models.CASCADE)
     
     

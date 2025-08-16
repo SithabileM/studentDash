@@ -1,1 +1,11 @@
 {%extends 'signupLayout.html'%}
+{%block head%}
+{%load static%}
+<link rel="stylesheet" type="text/css" href="{%static "css/forms.css"%}">
+{%endblock%}
+
+{%block heading%}
+<h1 id='heading'>Add new subject</h1>
+<p>Names of subjects should be unique. Include the grade, term and year for that subject e.g(Herritage Gr.8 Term1 2025)</p>
+</P>
+{%endblock%}

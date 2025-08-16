@@ -4,8 +4,11 @@
         <title>
             Classroom
         </title>
+        {%load static%}
+        <link rel="stylesheet" type="text/css" href="{%static "css/tables.css"%}">
     </head>
     <body>
+        <h1>Classroom Display</h1>
         <table>
             <thead>
                 <tr>
@@ -15,19 +18,16 @@
                     <th>Performace</th>
                 </tr>
             </thead>
-        {%for s in students%}
             <tbody>
+        {%for s in students%}
                 <tr>
                     <td>{{s.user.username}}</td>
                     <td>{{s.dateOfBirth}}</td>
                     <td>{{s.guardian}}</td>
                     <td><a href="{%url 'studentView' s.user.id%}">View Performace</a></td>
                 </tr>
-
-            </tbody>
-
-
-        </table>
         {%endfor%}
+            </tbody>
+        </table>
     </body>
 </html>

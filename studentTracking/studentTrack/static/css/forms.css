@@ -1,0 +1,55 @@
+#heading{
+    text-align: center;
+    color: #800000;
+    font-size: 8rem;
+}
+form{
+    margin-left: 20%;
+    margin-top: 7rem;
+}
+html{
+    background-color: #FFF7F3;
+}
+
+button{
+    background-color: #800000;
+    color: white;
+    height: 7rem;
+    width:15rem;
+    font-size: 3.5rem;
+}
+.button{
+    background-color: #800000;
+    color: white;
+    height: 7rem;
+    width:15rem;
+    font-size: 3.5rem;
+}
+.button:hover{
+    color:#C19A6B;
+}
+label{
+    color: #1f1f1f;
+    font-size: 5.5rem;
+}
+p{
+    margin-bottom: 4rem;
+    font-size: 3rem;
+}
+
+input{
+    height: 5.8rem;
+    font-size: 3rem;
+    margin-bottom: 2rem;
+}
+
+select{
+    height:4rem;
+    width:30%;
+    font-size: 1.5rem;
+}
+
+option{
+    font-size: 4.5rem;
+    width: 40%;
+}
