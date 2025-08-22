@@ -7,8 +7,10 @@
     </head>
     <body>
         <h1>My subjects</h1>
+        <div id='subjects'>
         {%for s in subjects%}
             <a href="{%url 'teacherSubject' s.id%}">{{s.name}}</a>
         {%endfor%}
+        </div>
     </body>
 </html>

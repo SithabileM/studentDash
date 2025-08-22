@@ -84,12 +84,6 @@ def studentSignup(request):
         print(student)
         student.save()
         form = StudentSignupForm(request.POST)
-        """
-        if form.is_valid():
-            user=form.save(commit=False)
-            form.save_m2m()
-            user.role='student'
-            user.save()"""
         return render(request,'studentSignup.html',{'form':form})
 
 def teacherSignup(request):
@@ -101,7 +95,9 @@ def teacherSignup(request):
         if form.is_valid():
             user=form.save(commit=False)
             user.role='teacher'
+            grades=request.POST.getlist('classroom')
             user.save()
+            user.classroom.set(grades)
             return render(request,'teacherSignup.html',{'form':form})
         
 def deleteSubject(request, pk):
@@ -158,6 +154,7 @@ def studentView(request,pk):
     #Get all marks specifically for the student with provided pk
     stdnt=CustomUser.objects.get(pk=pk)
     marks=StudentMark.objects.filter(learner=stdnt)
+    
     return render(request,'studentView.html',{'marks':marks}) 
 
 def subjectView(request,pk):
@@ -190,8 +187,16 @@ def teacherSubject(request,pk):
         try:
             AssignmentInstance=Assignment.objects.get(subject__id=pk)
             assignmentAmnt=AssignmentInstance.assignmentAmnt
+            numberOfAssignments=list(range(int(assignmentAmnt)))
         except Assignment.DoesNotExist:
-            pass
+            #If assignment does not exist, create a default fallback
+            AssignmentInstance,created=Assignment.objects.get_or_create(subject=subject)
+            if created:
+                assignmentAmnt=AssignmentInstance.assignmentAmnt
+                AssignmentInstance.save()
+    if request.method=='POST':
+        subject=Subject.objects.get(pk=pk)
+        AssignmentInstance=Assignment.objects.get(subject__id=pk)
         form=createAssignmentForm(request.POST,instance=AssignmentInstance)
         if form.is_valid():
             assignment=form.save(commit=False)
@@ -215,9 +220,10 @@ def teacherSubject(request,pk):
             #form.save()
             numberOfAssignments=list(range(int(assignmentAmnt)))
             #numberOfAssignments=list(range(1,assignment.assignmentAmnt+1))
-        else:
-            form=createAssignmentForm()
-            numberOfAssignments=list(range(int(assignmentAmnt)))
+        
+    form=createAssignmentForm()
+    numberOfAssignments=list(range(int(assignmentAmnt)))
+            
     
     #Create visualizations
     '''
@@ -244,7 +250,8 @@ def teacherSubject(request,pk):
     try:
         return render(request,'teacherSubject.html',{'students':students,'subject':subject,'form':form,'number':numberOfAssignments})
     except:
-        return redirect('userLogin')
+        print('exception occured')
+        return redirect('./'+str(pk))
 
     
 def addMarks(request,subject_id,user_id):
@@ -314,9 +321,23 @@ def studentSubjectDetails(request,pk):
     subject=Subject.objects.get(pk=pk)
     try:
         marks=StudentMark.objects.get(subject=subject,learner=request.user)
+        if marks.average >= 80 :
+            symbol='A'
+        elif marks.average >= 50:
+            symbol='B'
+        elif marks.average >= 20:
+            symbol='C'
+        elif marks.average >= 10:
+            symbol='D'
+        else:
+            symbol='U'
+        average=round(marks.average,2)
     except StudentMark.DoesNotExist:
-        marks=None
-    return render(request,'studentSubjectDetails.html',{'marks':marks,'subject':subject.name})
+        average=''
+        marks=''
+        symbol='Mark Recording in progress...'
+    return render(request,'studentSubjectDetails.html',{
+        'marks':marks,'average':average,'subject':subject.name,'symbol':symbol})
 
 def addMarkDistribution(request):
     markDistribution=[]
@@ -330,7 +351,7 @@ def addMarkDistribution(request):
     distribution,created=MarksDistribution.objects.get_or_create(assignment=assignment)
     distribution.distribution=markDistribution
     distribution.save()
-    return HttpResponse("Mark distribution successfully added")
+    return redirect("teacherSubject/"+request.POST.get('subject'))
               
        
                 

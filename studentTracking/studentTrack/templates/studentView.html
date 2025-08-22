@@ -2,12 +2,18 @@
 <html>
     <head>
         <title>Performace</title>
+        {%load static%}
+        <link rel="stylesheet" type="text/css" href="{%static "css/studentView.css"%}">
     </head>
     <body>
-        <h1>Student Performace</h1>
+        <h1 id='header'>Student Performace</h1>
+        <div id='subjectMarks'>
         {%for m in marks%}
-            <p>{{m.subject}}</p>
-            <p>{{m.average}}</p>
+            <div id='marks'>
+            <p id='subject'>{{m.subject}}</p>
+            <p id='average'>{{m.average}}%</p>
+            </div>
         {%endfor%}
+        </div>
     </body>
 </html>

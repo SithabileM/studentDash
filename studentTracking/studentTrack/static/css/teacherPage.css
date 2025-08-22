@@ -18,3 +18,9 @@ a:hover{
     color:#C19A6B;
     text-decoration: none;
 }
+
+#subjects{
+    display: flex;
+    flex-direction: column;
+    padding-left: 3rem;
+}

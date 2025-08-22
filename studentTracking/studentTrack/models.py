@@ -19,7 +19,7 @@ class Classroom(models.Model):
         
                
 class Teacher(models.Model):
-    user=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
+    user=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,unique=True)
     classroom = models.ManyToManyField(Classroom)
     
     
@@ -29,7 +29,7 @@ class Teacher(models.Model):
 class Subject(models.Model):
     #Name of subject should be very specific and unique i.e include the grade and term and year e.g(Herritage studies Gr.12 Term 1 2025)
     name = models.CharField(max_length=30,unique=True)
-    educator= models.OneToOneField(Teacher,on_delete=models.CASCADE)
+    educator= models.ForeignKey(Teacher,on_delete=models.CASCADE)
     
     def __str__(self):
         return self.name
