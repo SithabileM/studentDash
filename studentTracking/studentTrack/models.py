@@ -49,7 +49,7 @@ class Student(models.Model):
     subjects = models.ManyToManyField(Subject)
     classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE)
     dateOfBirth=models.DateField(null=True,blank=True)
-    guardian=models.CharField(null=True,blank=True)
+    guardian=models.CharField(null=True,blank=True, max_length=50)
     
     def __str__(self):
         return self.user.username
