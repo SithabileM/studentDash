@@ -3,11 +3,9 @@ from .models import *
 from .forms import *
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
-import matplotlib.pyplot as plt
 from io import BytesIO
 import base64
 from django.contrib.auth import get_user_model
-from django.http import HttpResponse
 # Create your views here.
 
 User=get_user_model()
@@ -290,17 +288,6 @@ def addMarks(request,subject_id,user_id):
     studentMarks.ExamMark=examMark
     studentMarks.average=average
     studentMarks.save()
-    '''
-    subject=Subject.objects.get(pk=subject_id)
-    courseMarks=0
-    testMarks=request.POST.get_list('Mark_'+ user_id)
-    marksAmnt=len(testMarks)
-    for mark in testMarks:
-        courseMarks+=int(mark)
-    courseMarks=courseMarks/marksAmnt
-    finalTestMark=int(request.POST.get('FinalTest_'+user_id))
-    
-    #Get the assignment weighs and the final test weigh
     #Get assignment for that subject
     assignment=Assignment.objects.get(subject=subject)
     #get assignmentWeight and finalTestWeight
@@ -314,32 +301,17 @@ def addMarks(request,subject_id,user_id):
     
     studentMark,created=StudentMark.objects.update_or_create(learner=request.user,subject=subject,courseMark=courseMarks,ExamMark=finalTestMark,average=finalPercentage)
     studentMark.save()
-    '''
-    return redirect('teacherPage')
 
-def studentSubjectDetails(request,pk):
-    subject=Subject.objects.get(pk=pk)
-    try:
-        marks=StudentMark.objects.get(subject=subject,learner=request.user)
-        if marks.average >= 80 :
-            symbol='A'
-        elif marks.average >= 50:
-            symbol='B'
-        elif marks.average >= 20:
-            symbol='C'
-        elif marks.average >= 10:
-            symbol='D'
-        else:
-            symbol='U'
-        average=round(marks.average,2)
-    except StudentMark.DoesNotExist:
-        average=''
-        marks=''
-        symbol='Mark Recording in progress...'
-    return render(request,'studentSubjectDetails.html',{
-        'marks':marks,'average':average,'subject':subject.name,'symbol':symbol})
-
-def addMarkDistribution(request):
+    subject=Subject.objects.get(pk=subject_id)
+    courseMarks=0
+    testMarks=request.POST.get_list('Mark_'+ user_id)
+    marksAmnt=len(testMarks)
+    for mark in testMarks:
+        courseMarks+=int(mark)
+    courseMarks=courseMarks/marksAmnt
+    finalTestMark=int(request.POST.get('FinalTest_'+user_id))
+    
+    #Get the assignment weighs and
     markDistribution=[]
     for i in request.POST:
         try:
