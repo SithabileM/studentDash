@@ -1,0 +1,30 @@
+#header{
+    text-align: center;
+    color: #800000;
+    font-size: 10rem;
+}
+
+#marks{
+        background-color: #800000;
+        font-size: 3.5rem;
+        width:fit-content;
+        margin-left: 2.5rem; 
+}
+
+#subject{
+    color: #C19A6B;
+}
+
+html{
+    background-color: #FFF7F3;
+
+}
+
+#average{
+    color: white;
+}
+
+#subjectMarks{
+    display: flex;
+    flex-wrap: wrap;
+}

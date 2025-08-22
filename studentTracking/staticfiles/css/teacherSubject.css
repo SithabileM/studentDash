@@ -1,0 +1,103 @@
+html{
+    background-color: #fff7f3;
+    font-family: arial, sans-serif;
+    color: #1f1f1f;
+}
+
+h2,h3{
+    color: #800000;
+    font-size: 7rem;
+    text-align: left;
+    
+}
+
+h1{
+    font-size: 10rem;
+    color: #800000;
+    text-align: center;
+}
+
+table{
+    width: 90%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+}
+
+th{
+    background-color: #800000;
+    color: white;
+    padding: 12px;
+    text-align: left;
+    font-size: 6rem;
+}
+
+td{
+    padding: 10px;
+    border-bottom: 1px solid #EDEDED;
+    font-size: 3.5rem;
+}
+
+a{
+    color:#800000;
+    text-decoration: none;
+}
+
+a:hover{
+    color:#C19A6B;
+    text-decoration: underline;
+}
+form{
+    margin-left: 10%;
+    margin-top: 7rem;
+}
+html{
+    background-color: #FFF7F3;
+}
+
+button{
+    background-color: #800000;
+    color: white;
+    height: 7rem;
+    width:15rem;
+    font-size: 3.5rem;
+}
+.button{
+    background-color: #800000;
+    color: white;
+    height: 7rem;
+    width:15rem;
+    font-size: 3.5rem;
+}
+button:hover{
+    color: #C19A6B;
+}
+.button:hover{
+    color:#C19A6B
+}
+label{
+    color: #1f1f1f;
+    font-size: 5.5rem;
+}
+p{
+    margin-bottom: 4rem;
+    font-size: 4rem;
+}
+
+input{
+    height: 5.8rem;
+    font-size: 3rem;
+    margin-bottom: 2rem;
+}
+
+select{
+    height:4rem;
+    width:30%;
+    font-size: 1.5rem;
+}
+
+option{
+    font-size: 4.5rem;
+    width: 40%;
+}
