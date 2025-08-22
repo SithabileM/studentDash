@@ -24,8 +24,8 @@ urlpatterns = [
     #student related paths
     path('studentPage',views.studentPage,name='studentPage'),
     path('addMarks/<int:subject_id>/<int:user_id>/', views.addMarks, name='addMarks'),
-    path('studentSubjectDetails/<int:pk>',views.studentSubjectDetails,name='studentSubjectDetails'),
-    path('addMarkDistribution',views.addMarkDistribution,name='addMarkDistribution')
+   # path('studentSubjectDetails/<int:pk>',views.studentSubjectDetails,name='studentSubjectDetails'),
+   # path('addMarkDistribution',views.addMarkDistribution,name='addMarkDistribution')
 
     
 ]

@@ -224,27 +224,6 @@ def teacherSubject(request,pk):
             
     
     #Create visualizations
-    '''
-    try:
-        marks=StudentMark.objects.filter(subject=subject)
-        data=marks.values_list('learner__username','average')
-        learners,averages=zip(*data)
-        plt.bar(learners,averages)
-        plt.xlabel('Learner')
-        plt.ylabel('Average')
-        plt.title('Learner Averages')
-    
-        buffer=BytesIO()
-        plt.savefig(buffer, format='png')
-        buffer.seek(0)
-        image_png=buffer.getvalue()
-        buffer.close()
-        plt.close()
-    
-        graphic=base64.b64decode(image_png).decode('utf-8')
-    except:
-        graphic=None
-        '''
     try:
         return render(request,'teacherSubject.html',{'students':students,'subject':subject,'form':form,'number':numberOfAssignments})
     except:
