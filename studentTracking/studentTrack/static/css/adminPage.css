@@ -121,3 +121,9 @@ h2{
 label{
     font-size: 3.5rem;
 }
+
+footer{
+    margin-left: 0;
+    margin-bottom: 0;
+    position: fixed;
+}
